@@ -1,7 +1,7 @@
 from tkinter import *  # Importa todos los símbolos del módulo tkinter
 from tkinter import ttk  # Importa el submódulo ttk de tkinter
 from tkinter import filedialog  # Importa el submódulo filedialog de tkinter
-from backend_huffman import HuffmanTree  # Importa la clase HuffmanTree del módulo backend_huffman
+#from backend_huffman import HuffmanTree  # Importa la clase HuffmanTree del módulo backend_huffman
 
 class InterfazHuffman:
     def __init__(self):
@@ -21,9 +21,9 @@ class InterfazHuffman:
         # Crea un botón en el marco con el texto "Abrir archivo" y vincula la función mostrar_info_archivo al evento click
         ttk.Button(frm, text="Abrir archivo", command=self.mostrar_info_archivo).grid(column=0, row=1)
         # Crea un botón en el marco con el texto "Comprimir archivo" y vincula el método comprimir de arbol_huffman al evento click
-        ttk.Button(frm, text="Comprimir archivo", command=self.arbol_huffman.comprimir).grid(column=0, row=2)
+        ttk.Button(frm, text="Comprimir archivo", command=root.destroy).grid(column=0, row=2)
         # Crea un botón en el marco con el texto "Descomprimir archivo" y vincula el método descomprimir de arbol_huffman al evento click
-        ttk.Button(frm, text="Descomprimir archivo", command=self.arbol_huffman.descomprimir).grid(column=0, row=3)
+        ttk.Button(frm, text="Descomprimir archivo", command=root.destroy).grid(column=0, row=3)
         root.mainloop()  # Inicia el bucle principal de la interfaz gráfica
 
     def mostrar_info_archivo(self):
@@ -60,6 +60,14 @@ class InterfazHuffman:
             for letra, cantidad in contar_caracteres.items():
                 etiqueta = Label(ventana_info, text=f"'{letra}': {cantidad}")
                 etiqueta.pack()
+class HuffmanTree:
+    def __init__(self):
+        self.raiz = None
 
+    def contar_caracteres(self, contenido):
+        contar_caracteres = {}
+        for caracter in contenido:
+            contar_caracteres[caracter] = contar_caracteres.get(caracter, 0) + 1
+        return contar_caracteres
 # Crea una instancia de InterfazHuffman, lo que inicia la aplicación
 InterfazHuffman()
